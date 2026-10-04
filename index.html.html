@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>School Canteen Token Manager – Velammal Vidyalaya Alapakkam</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f6f3ef;--card:#fff;--ink:#2a2023;--mute:#6f6468;--brand:#8b1a2b;--brand2:#b8860b;--line:#e6dfd8;--ok:#1f7a4d;--warn:#b26a00;--soft:#fbeff1}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171214;--card:#221a1d;--ink:#f1e9ea;--mute:#a99ca0;--brand:#d4475b;--brand2:#e0b24a;--line:#3a2d31;--ok:#4cc38a;--warn:#f0a63c;--soft:#2d1d21}}
+:root[data-theme="dark"]{--bg:#171214;--card:#221a1d;--ink:#f1e9ea;--mute:#a99ca0;--brand:#d4475b;--brand2:#e0b24a;--line:#3a2d31;--ok:#4cc38a;--warn:#f0a63c;--soft:#2d1d21}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;line-height:1.45}
+header{background:linear-gradient(135deg,#6e1020,#8b1a2b 60%,#a8553a);color:#fff;padding:14px 20px}
+.top{max-width:1050px;margin:auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{width:46px;height:46px;border-radius:50%;background:#fff;color:#8b1a2b;display:grid;place-items:center;font-weight:800;font-size:22px;border:3px solid #e0b24a}
+.top h1{font-size:18px;margin:0}.top small{opacity:.85}
+.who{margin-left:auto;text-align:right;font-size:13px}
+.who b{display:block;font-size:15px}
+nav{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+nav .in{max-width:1050px;margin:auto;display:flex;overflow-x:auto}
+nav button{flex:1;min-width:130px;background:none;border:0;border-bottom:3px solid transparent;padding:13px 10px;font:inherit;font-weight:600;color:var(--mute);cursor:pointer;white-space:nowrap}
+nav button.on{color:var(--brand);border-color:var(--brand)}
+nav button span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--line);font-size:11px;margin-right:6px}
+nav button.on span{background:var(--brand);color:#fff}
+main{max-width:1050px;margin:auto;padding:20px 16px 40px}
+nav button.lock{opacity:.45}
+.screen{display:none}.screen.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:16px}
+.card h2{margin:0 0 4px;font-size:18px;color:var(--brand)}.card p.s{margin:0 0 14px;color:var(--mute);font-size:13px}
+.grid{display:grid;gap:16px;grid-template-columns:1fr 1fr}@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:6px 10px;font-size:14px}.kv b{color:var(--mute);font-weight:600}
+.bal{background:linear-gradient(135deg,#8b1a2b,#b8860b);color:#fff;border-radius:12px;padding:16px;text-align:center}
+.bal div{font-size:34px;font-weight:800}.bal small{opacity:.9}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.chip{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:20px;padding:8px 16px;cursor:pointer;font:inherit;font-weight:600}
+.chip.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+label{display:block;font-size:13px;font-weight:600;color:var(--mute);margin:10px 0 4px}
+input,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+.btn{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:11px 20px;font:inherit;font-weight:700;cursor:pointer}
+.btn:disabled{opacity:.45;cursor:not-allowed}.btn.alt{background:var(--brand2)}.btn.ghost{background:none;color:var(--brand);border:1px solid var(--brand)}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.item{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--bg)}
+.item .e{font-size:30px}.item b{display:block}.item .p{color:var(--brand);font-weight:700}
+.qty{display:flex;align-items:center;gap:10px;margin-top:8px}.qty button{width:30px;height:30px;border-radius:50%;border:1px solid var(--brand);background:none;color:var(--brand);font-size:18px;cursor:pointer}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mute);font-size:12px;text-transform:uppercase}
+.wrap{overflow-x:auto}
+.tag{display:inline-block;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:700}
+.tag.p{background:#fff1d6;color:var(--warn)}.tag.s{background:#dcf5e8;color:var(--ok)}
+@media(prefers-color-scheme:dark){.tag.p{background:#3a2c10}.tag.s{background:#12301f}}
+.pid{font-family:ui-monospace,Consolas,monospace;font-weight:700;color:var(--brand)}
+.row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;font-size:14px}.tot{border-top:2px dashed var(--line);font-weight:800;margin-top:6px;padding-top:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat{background:var(--soft);border-radius:10px;padding:12px;text-align:center}.stat b{display:block;font-size:22px;color:var(--brand)}.stat small{color:var(--mute)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;place-items:center;z-index:20;padding:16px}.modal.on{display:grid}
+.modal .box{background:var(--card);border-radius:14px;padding:22px;max-width:380px;width:100%}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#222;color:#fff;padding:11px 20px;border-radius:24px;font-size:14px;opacity:0;pointer-events:none;transition:.3s;z-index:30}.toast.on{opacity:1}
+.empty{color:var(--mute);text-align:center;padding:18px}
+footer{text-align:center;color:var(--mute);font-size:12px;padding:20px}
+</style>
+</head>
+<body>
+<header><div class="top">
+<div class="logo">V</div>
+<div><h1>School Canteen Token Manager</h1><small>Velammal Vidyalaya, Alapakkam</small></div>
+<div class="who"><div id="who"></div><button id="sw" class="chip" style="padding:3px 12px;font-size:12px;margin-top:4px;display:none">Switch student</button></div>
+</div></header>
+<nav><div class="in" id="nav">
+<button data-s="1" class="on"><span>1</span>Buy Tokens</button>
+<button data-s="2"><span>2</span>Order Food</button>
+<button data-s="3"><span>3</span>Canteen Counter</button>
+<button data-s="4"><span>4</span>History &amp; Balance</button>
+</div></nav>
+<main>
+
+<section class="screen on" id="s1">
+<div id="pick" class="card" style="max-width:560px;margin:auto"><h2>Select Student</h2><p class="s">Choose the student to buy tokens for. Every other screen follows this selection.</p>
+<label>Standard</label><select id="stdf"></select>
+<label>Student</label><select id="stu"></select>
+<label>Or enter Student ID</label><input id="sidin" placeholder="e.g. 7401" inputmode="numeric">
+<p style="margin-top:14px"><button class="btn" id="cont" style="width:100%">Continue →</button></p></div>
+<div id="buy" class="grid">
+<div class="card"><h2>Student Details</h2><p class="s">Tokens are tied to this Student ID. 1 Token = ₹1</p>
+<div class="kv" id="sd"></div>
+<div class="bal" style="margin-top:14px"><small>Available Token Balance</small><div class="balv">0</div></div>
+<p style="margin-bottom:0"><button class="btn ghost" id="sw2">Change Student</button></p></div>
+<div class="card"><h2>Buy Tokens in Advance</h2><p class="s">Choose an amount and pay securely</p>
+<div class="chips" id="amts"></div>
+<label>Or enter custom amount (₹10 – ₹5000)</label><input id="amt" type="number" min="10" max="5000" placeholder="Enter amount">
+<label>Payment Mode</label><select id="mode"><option>UPI</option><option>Debit / Credit Card</option><option>Net Banking</option></select>
+<p style="margin-top:14px"><button class="btn" id="pay">Pay &amp; Get Tokens</button></p></div>
+</div>
+</section>
+
+<section class="screen" id="s2">
+<div class="grid" style="grid-template-columns:2fr 1fr">
+<div class="card"><h2>Canteen Menu</h2><p class="s">Select items and pay using tokens</p>
+<div class="chips" id="cats"></div><div class="items" id="items"></div></div>
+<div class="card" style="align-self:start"><h2>Your Order</h2><p class="s" id="cfor"></p>
+<div id="cart"></div>
+<div class="row tot"><span>Total</span><span id="ctot">0 tokens</span></div>
+<div class="row"><span>Balance</span><span class="balv">0</span></div>
+<p><button class="btn" id="place" style="width:100%">Pay with Tokens</button></p></div>
+</div>
+</section>
+
+<section class="screen" id="s3">
+<div class="card"><h2>Canteen Owner Counter</h2><p class="s">Enter the Purchase ID shown by the parent / student and serve the food</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><input id="pidin" placeholder="e.g. PID20261004001" style="flex:1;min-width:200px;text-transform:uppercase"><button class="btn" id="find">Find Order</button></div>
+<div id="found" style="margin-top:14px"></div></div>
+<div class="card"><h2>Pending Orders</h2><p class="s">Tap an order to load it</p><div class="wrap" id="pending"></div></div>
+</section>
+
+<section class="screen" id="s4">
+<div class="stats" style="margin-bottom:16px">
+<div class="stat"><b class="balv">0</b><small>Token Balance</small></div>
+<div class="stat"><b id="st1">0</b><small>Tokens Spent</small></div>
+<div class="stat"><b id="st2">0</b><small>Purchases</small></div></div>
+<div class="card"><h2>Purchase History</h2><p class="s">Filter by date and status</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+<div style="flex:1;min-width:150px"><label>Date</label><input type="date" id="fd"></div>
+<div style="flex:1;min-width:150px"><label>Status</label><select id="fs"><option value="">All</option><option>Pending</option><option>Served</option></select></div>
+<div style="align-self:end"><button class="btn ghost" id="fc">Clear</button></div></div>
+<div class="wrap" id="hist"></div></div>
+<div class="card"><h2>Token Top-up History</h2><div class="wrap" id="tops"></div></div>
+</section>
+
+</main>
+<footer>School Canteen Token Manager · Young Entrepreneur · Everyday Problems, Innovative Solutions<br>Demo data is saved only in this browser.</footer>
+
+<div class="modal" id="modal"><div class="box" id="mbox"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const MENU={Breakfast:[["Pongal",30,"🍚"],["Idly",20,"🥟"],["Dosai",25,"🥞"],["Poori",30,"🫓"]],
+Lunch:[["Meals",60,"🍛"],["Tomato Rice",40,"🍅"],["Curd Rice",40,"🥣"],["Lemon Rice",40,"🍋"],["Veg Biriyani",60,"🍲"],["Fruits Salad",30,"🍓"]],
+Snacks:[["Coffee",15,"☕"],["Tea",10,"🍵"],["Badam Milk",20,"🥛"],["Biscuits",10,"🍪"],["Samosa",15,"🥠"],["Cream Bun",20,"🧁"]]};
+const KEY="canteen_v2";
+const $=id=>document.getElementById(id);
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const toast=m=>{const t=$("toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2400)};
+const fmt=d=>new Date(d).toLocaleString("en-IN",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"});
+const day=d=>{const x=new Date(d);return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")};
+const modal=h=>{$("mbox").innerHTML=h;$("modal").classList.add("on")};
+const closeM=()=>$("modal").classList.remove("on");
+let S=null,cart={},cat="Breakfast",amt=0;
+try{const r=localStorage.getItem(KEY);if(r)S=JSON.parse(r)}catch(e){}
+if(!S){const y=new Date(Date.now()-864e5).toISOString();
+S={seq:1,cur:null,
+students:[["7401","Richard Britto B","8th D",155],["7402","Priya S","8th D",80],["7403","Arjun K","7th A",200],["7415","Meera R","6th B",50],["7422","Karthik V","9th C",0]].map(([id,name,std,bal])=>({id,name,std,bal})),
+tops:[{id:"TXN0001",sid:"7401",date:y,amt:200,mode:"UPI"}],
+orders:[{id:"PID"+day(y).replace(/-/g,"")+"001",sid:"7401",date:y,items:[{n:"Pongal",q:1,p:30},{n:"Coffee",q:1,p:15}],total:45,status:"Served"}]};}
+const cs=()=>S.students.find(s=>s.id==S.cur);
+const nm=s=>s.name+" ("+s.id+")";
+const stOf=id=>S.students.find(s=>s.id==id)||{name:"Unknown",std:"",id};
+
+function go(n){if((n==2||n==4)&&!cs()){toast("Please select a student first");n=1}
+document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id=="s"+n));
+document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.s==n));
+if(n==1)drawS1();if(n==2)drawMenu();if(n==3)drawPending();if(n==4)drawHist();upd();window.scrollTo(0,0)}
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>go(b.dataset.s));
+function upd(){const s=cs();document.querySelectorAll(".balv").forEach(e=>e.textContent=s?s.bal:0);
+$("who").innerHTML=s?`<small>Student</small><b>${s.name}</b><small>ID ${s.id} · ${s.std}</small>`:`<small>No student selected</small><b>Select on Screen 1</b>`;
+$("sw").style.display=s?"inline-block":"none";
+document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("lock",(b.dataset.s==2||b.dataset.s==4)&&!s));
+$("cfor").textContent=s?"For "+nm(s):""}
+
+/* Screen 1 */
+function fillStu(){const f=$("stdf").value;$("stu").innerHTML=S.students.filter(s=>!f||s.std==f).map(s=>`<option value="${s.id}">${s.id} – ${s.name} (${s.std})</option>`).join("")}
+function fillStd(){const l=[...new Set(S.students.map(s=>s.std))].sort();$("stdf").innerHTML='<option value="">All Standards</option>'+l.map(x=>`<option>${x}</option>`).join("");fillStu()}
+$("stdf").onchange=fillStu;
+function drawS1(){const s=cs();$("pick").style.display=s?"none":"block";$("buy").style.display=s?"grid":"none";
+if(s)$("sd").innerHTML=`<b>Student ID</b><span>${s.id}</span><b>Name</b><span>${s.name}</span><b>Standard</b><span>${s.std}</span>`}
+$("cont").onclick=()=>{const id=$("sidin").value.trim()||$("stu").value,s=S.students.find(x=>x.id==id);
+if(!s)return toast("Student ID not found");S.cur=s.id;cart={};$("sidin").value="";save();upd();drawS1();toast("Selected "+s.name)};
+const sw=()=>{S.cur=null;cart={};save();go(1)};$("sw").onclick=sw;$("sw2").onclick=sw;
+$("amts").innerHTML=[50,100,200,500].map(a=>`<button class="chip" data-a="${a}">₹${a}</button>`).join("");
+$("amts").onclick=e=>{const a=e.target.dataset.a;if(!a)return;amt=+a;$("amt").value=a;
+document.querySelectorAll("#amts .chip").forEach(c=>c.classList.toggle("on",c.dataset.a==a))};
+$("amt").oninput=()=>{amt=+$("amt").value;document.querySelectorAll("#amts .chip").forEach(c=>c.classList.remove("on"))};
+$("pay").onclick=()=>{const s=cs();amt=Math.floor(+$("amt").value);if(!(amt>=10&&amt<=5000))return toast("Enter an amount between ₹10 and ₹5000");
+modal(`<h2 style="margin:0 0 6px;color:var(--brand)">Confirm Payment</h2>
+<div class="row"><span>Student</span><span>${nm(s)}</span></div>
+<div class="row"><span>Mode</span><span>${$("mode").value}</span></div>
+<div class="row tot"><span>Pay</span><span>₹${amt}</span></div>
+<p style="display:flex;gap:10px"><button class="btn ghost" onclick="closeM()" style="flex:1">Cancel</button><button class="btn" id="ok" style="flex:1">Pay ₹${amt}</button></p>`);
+$("ok").onclick=()=>{const t={id:"TXN"+String(S.tops.length+1).padStart(4,"0"),sid:s.id,date:new Date().toISOString(),amt,mode:$("mode").value};
+S.tops.push(t);s.bal+=amt;save();upd();
+modal(`<div style="text-align:center"><div style="font-size:44px">✅</div><h2 style="margin:4px 0;color:var(--ok)">Payment Successful</h2>
+<p>${t.id} · ₹${amt} added as <b>${amt} tokens</b> for ${s.name}<br>New balance: <b>${s.bal}</b></p>
+<button class="btn" onclick="closeM();go(2)">Order Food Now</button></div>`);$("amt").value="";amt=0;
+document.querySelectorAll("#amts .chip").forEach(c=>c.classList.remove("on"))}};
+$("modal").onclick=e=>{if(e.target.id=="modal")closeM()};
+
+/* Screen 2 */
+function drawMenu(){$("cats").innerHTML=Object.keys(MENU).map(c=>`<button class="chip ${c==cat?"on":""}" data-c="${c}">${c}</button>`).join("");
+$("items").innerHTML=MENU[cat].map(([n,p,e])=>`<div class="item"><div class="e">${e}</div><b>${n}</b><span class="p">${p} tokens</span>
+<div class="qty"><button data-n="${n}" data-d="-1">−</button><span>${cart[n]?cart[n].q:0}</span><button data-n="${n}" data-d="1">+</button></div></div>`).join("");drawCart()}
+$("cats").onclick=e=>{if(e.target.dataset.c){cat=e.target.dataset.c;drawMenu()}};
+$("items").onclick=e=>{const n=e.target.dataset.n;if(!n)return;const it=Object.values(MENU).flat().find(x=>x[0]==n);
+const q=Math.max(0,(cart[n]?cart[n].q:0)+ +e.target.dataset.d);if(q)cart[n]={n,q,p:it[1]};else delete cart[n];drawMenu()};
+const ctotal=()=>Object.values(cart).reduce((a,c)=>a+c.q*c.p,0);
+function drawCart(){const l=Object.values(cart);$("cart").innerHTML=l.length?l.map(c=>`<div class="row"><span>${c.n} × ${c.q}</span><span>${c.q*c.p}</span></div>`).join(""):'<div class="empty">No items selected</div>';
+$("ctot").textContent=ctotal()+" tokens";upd();$("place").disabled=!l.length}
+$("place").onclick=()=>{const s=cs(),t=ctotal();if(t>s.bal){modal(`<div style="text-align:center"><div style="font-size:40px">⚠️</div><h2 style="margin:4px 0">Insufficient Tokens</h2><p>Need ${t}, balance ${s.bal}. Please buy more tokens.</p><button class="btn" onclick="closeM();go(1)">Buy Tokens</button></div>`);return}
+const d=new Date(),id="PID"+day(d).replace(/-/g,"")+String(S.seq++).padStart(3,"0");
+const o={id,sid:s.id,date:d.toISOString(),items:Object.values(cart).map(c=>({...c})),total:t,status:"Pending"};
+S.orders.push(o);s.bal-=t;cart={};save();
+modal(`<div style="text-align:center"><div style="font-size:44px">🎉</div><h2 style="margin:4px 0;color:var(--ok)">Order Placed</h2>
+<p>Show this Purchase ID at the canteen counter</p><div class="pid" style="font-size:24px;margin:8px 0">${id}</div>
+<p>${s.name} · ${o.items.map(i=>i.n+" × "+i.q).join(", ")}<br>${t} tokens used · Balance ${s.bal}</p>
+<p style="display:flex;gap:10px"><button class="btn ghost" style="flex:1" onclick="closeM();drawMenu()">Close</button><button class="btn" style="flex:1" onclick="closeM();go(3);$('pidin').value='${id}';find()">Open Counter</button></p></div>`);drawMenu()};
+
+/* Screen 3 */
+function find(){const id=$("pidin").value.trim().toUpperCase(),o=S.orders.find(x=>x.id==id);
+if(!id){$("found").innerHTML="";return}
+if(!o){$("found").innerHTML='<div class="empty">❌ No order found for this Purchase ID</div>';return}
+const st=stOf(o.sid);
+$("found").innerHTML=`<div class="card" style="background:var(--bg);margin:0"><div class="row"><span class="pid">${o.id}</span><span class="tag ${o.status=="Served"?"s":"p"}">${o.status}</span></div>
+<div class="kv" style="margin:8px 0"><b>Student</b><span>${st.name} · ID ${st.id} · ${st.std}</span><b>Ordered</b><span>${fmt(o.date)}</span></div>
+${o.items.map(i=>`<div class="row"><span>${i.n} × ${i.q}</span><span>${i.q*i.p}</span></div>`).join("")}
+<div class="row tot"><span>Total</span><span>${o.total} tokens</span></div>
+<button class="btn alt" id="serve" ${o.status=="Served"?"disabled":""}>${o.status=="Served"?"Already Served":"✔ Mark as Served"}</button></div>`;
+$("serve").onclick=()=>{o.status="Served";o.served=new Date().toISOString();save();toast("Served to "+st.name);find();drawPending()}}
+$("find").onclick=find;$("pidin").onkeydown=e=>{if(e.key=="Enter")find()};
+function drawPending(){const p=S.orders.filter(o=>o.status=="Pending").reverse();
+$("pending").innerHTML=p.length?`<table><tr><th>Purchase ID</th><th>Student</th><th>Items</th><th>Tokens</th><th></th></tr>${p.map(o=>{const st=stOf(o.sid);return `<tr><td class="pid">${o.id}</td><td>${st.name}<br><small style="color:var(--mute)">${st.id} · ${st.std}</small></td><td>${o.items.map(i=>i.n+" × "+i.q).join(", ")}</td><td>${o.total}</td><td><button class="btn ghost" data-p="${o.id}">Open</button></td></tr>`}).join("")}</table>`:'<div class="empty">No pending orders 🎉</div>'}
+$("pending").onclick=e=>{if(e.target.dataset.p){$("pidin").value=e.target.dataset.p;find();window.scrollTo(0,0)}};
+
+/* Screen 4 */
+function drawHist(){const d=$("fd").value,s=$("fs").value,sid=S.cur;
+const mine=S.orders.filter(o=>o.sid==sid);
+const l=mine.filter(o=>(!d||day(o.date)==d)&&(!s||o.status==s)).slice().reverse();
+$("hist").innerHTML=l.length?`<table><tr><th>Purchase ID</th><th>Date</th><th>Items</th><th>Tokens</th><th>Status</th></tr>${l.map(o=>`<tr><td class="pid">${o.id}</td><td>${fmt(o.date)}</td><td>${o.items.map(i=>i.n+" × "+i.q).join(", ")}</td><td>−${o.total}</td><td><span class="tag ${o.status=="Served"?"s":"p"}">${o.status}</span></td></tr>`).join("")}</table>`:'<div class="empty">No purchases found</div>';
+const tp=S.tops.filter(t=>t.sid==sid).slice().reverse();
+$("tops").innerHTML=tp.length?`<table><tr><th>Txn ID</th><th>Date</th><th>Mode</th><th>Tokens</th></tr>${tp.map(t=>`<tr><td class="pid">${t.id}</td><td>${fmt(t.date)}</td><td>${t.mode}</td><td>+${t.amt}</td></tr>`).join("")}</table>`:'<div class="empty">No top-ups yet</div>';
+$("st1").textContent=mine.reduce((a,o)=>a+o.total,0);$("st2").textContent=mine.length;upd()}
+$("fd").onchange=$("fs").onchange=drawHist;$("fc").onclick=()=>{$("fd").value="";$("fs").value="";drawHist()};
+
+fillStd();drawS1();upd();
+</script>
+</body>
+</html>
